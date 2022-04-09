@@ -478,6 +478,8 @@ MonoBehaviour:
   zSize: 250
   perlinHeight: 10
   perlinZoom: 0.05
+  coin: {fileID: 7215309092944176984, guid: 11399f5e94402c2468b517a1e01fb0cf, type: 3}
+  spawnAmount: 3
 --- !u!4 &1655348447
 Transform:
   m_ObjectHideFlags: 0
