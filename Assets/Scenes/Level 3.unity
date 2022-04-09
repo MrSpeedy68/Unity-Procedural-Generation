@@ -405,7 +405,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 10000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -650,10 +650,6 @@ PrefabInstance:
     - target: {fileID: 5319445051846936174, guid: 9564713db7752ca468b0836d8996a753, type: 3}
       propertyPath: m_Name
       value: Planet
-      objectReference: {fileID: 0}
-    - target: {fileID: 5319445051846936174, guid: 9564713db7752ca468b0836d8996a753, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9564713db7752ca468b0836d8996a753, type: 3}

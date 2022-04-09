@@ -7,33 +7,35 @@ public class Planet : MonoBehaviour
     private string name { get; set; }
     private float diameter;
     private float distanceToSun = 150;
-    float rotationPeriod = 10f;
-    float orbitalVelocity = .20f;
+    private float rotationPeriod = 10f;
+    private float orbitalVelocity = .20f;
+    private Color color = new Color(1.0f,1.0f,1.0f);
     
     
     float orbitalAngle = 0.0f;
     //float angle = 0.0f;
     //float orbitalRotationalSpeed = 20f;
 
-    Color c1 = Color.blue;
+    //private Color c1 = color;
     int lengthOfLineRenderer = 100;
 
     GameObject sun;
 
-    public void CreatePlanet(string newName, float newDiameter, float newDistanceToSun, float newRotationPeriod, float newOrbitalVelocity)
+    public void CreatePlanet(string newName, float newDiameter, float newDistanceToSun, float newRotationPeriod, float newOrbitalVelocity, Color newColor)
     {
         name = newName;
-        diameter = newDiameter;
-        distanceToSun = newDistanceToSun * 50;
+        diameter = newDiameter * 10;
+        distanceToSun = newDistanceToSun * 75;
         rotationPeriod = newRotationPeriod;
         orbitalVelocity = newOrbitalVelocity;
+        color = newColor;
     }  
 
     void DrawOrbit()
     {
         LineRenderer lineRenderer = gameObject.AddComponent<LineRenderer>();
         lineRenderer.material = new Material(Shader.Find("Legacy Shaders/Particles/Additive"));
-        lineRenderer.SetColors(c1, c1);
+        lineRenderer.SetColors(color, color);
         lineRenderer.SetWidth(1.0f, 1.0f);
         lineRenderer.SetVertexCount(lengthOfLineRenderer + 1);
 
@@ -56,6 +58,10 @@ public class Planet : MonoBehaviour
         sun = GameObject.Find("sun");
         transform.position = new Vector3(distanceToSun, 0, distanceToSun);
         transform.localScale = new Vector3(diameter, diameter, diameter);
+        transform.name = name;
+
+        var Mat = GetComponent<Renderer>();
+        Mat.material.color = color;
         
         DrawOrbit();
     }

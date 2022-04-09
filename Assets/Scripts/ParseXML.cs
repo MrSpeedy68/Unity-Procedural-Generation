@@ -31,14 +31,23 @@ public class ParseXML : MonoBehaviour
                 print(nodeList[i].Attributes["distancetoSun"].Value);
                 print(nodeList[i].Attributes["rotationPeriod"].Value);
                 print(nodeList[i].Attributes["orbitalVelocity"].Value);
+                print(nodeList[i].Attributes["color"].Value);
 
                 string name = nodeList[i].Attributes["name"].Value;
                 float diam = float.Parse(nodeList[i].Attributes["diameter"].Value);
                 float distToSun = float.Parse(nodeList[i].Attributes["distancetoSun"].Value);
                 float rotPeriod = float.Parse(nodeList[i].Attributes["rotationPeriod"].Value);
                 float orbVelocity = float.Parse(nodeList[i].Attributes["orbitalVelocity"].Value);
+                string hexVal = nodeList[i].Attributes["color"].Value;
+
+                Color newCol;
                 
-                CreatePlanet(name, diam,distToSun,rotPeriod,orbVelocity);
+                if (ColorUtility.TryParseHtmlString(hexVal, out newCol)) //Parsing Color Hex Value to a Color if succesful then create new planet
+                {
+                    CreatePlanet(name, diam, distToSun, rotPeriod, orbVelocity, newCol);
+                }
+                else CreatePlanet(name, diam, distToSun, rotPeriod, orbVelocity, Color.grey);
+                
             }
         }
     }
@@ -49,12 +58,12 @@ public class ParseXML : MonoBehaviour
         
     }
 
-    private void CreatePlanet(string aName, float aDiameter, float aDistancetoSun, float aRotationPeriod, float aOrbitalVelocity)
+    private void CreatePlanet(string aName, float aDiameter, float aDistancetoSun, float aRotationPeriod, float aOrbitalVelocity, Color aCol)
     {
         var p = Instantiate(planet, transform.position, Quaternion.identity);
         _Planet = p.GetComponent<Planet>();
 
-       _Planet.CreatePlanet(aName, aDiameter, aDistancetoSun, aRotationPeriod, aOrbitalVelocity);
+       _Planet.CreatePlanet(aName, aDiameter, aDistancetoSun, aRotationPeriod, aOrbitalVelocity, aCol);
     }
 
     // private void LoadData()
