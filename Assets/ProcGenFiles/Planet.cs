@@ -13,21 +13,19 @@ public class Planet : MonoBehaviour
     
     
     float orbitalAngle = 0.0f;
-    //float angle = 0.0f;
-    //float orbitalRotationalSpeed = 20f;
-
-    //private Color c1 = color;
     int lengthOfLineRenderer = 100;
 
     GameObject sun;
 
+
+
     public void CreatePlanet(string newName, float newDiameter, float newDistanceToSun, float newRotationPeriod, float newOrbitalVelocity, Color newColor)
     {
         name = newName;
-        diameter = newDiameter * 10;
-        distanceToSun = newDistanceToSun * 75;
+        diameter = newDiameter * 25;
+        distanceToSun = newDistanceToSun * 150;
         rotationPeriod = newRotationPeriod;
-        orbitalVelocity = newOrbitalVelocity;
+        orbitalVelocity = newOrbitalVelocity * 0.1f;
         color = newColor;
     }  
 

@@ -9,8 +9,11 @@ public class ParseXML : MonoBehaviour
     private XmlDocument itemDataXml;
 
     public GameObject planet;
+    
+    public GameObject orbitalPickup;
 
     private Planet _Planet;
+    private Satellite _Satellite;
     void Start()
     {
         TextAsset xmlTextAsset = Resources.Load<TextAsset>("planets");
@@ -58,17 +61,32 @@ public class ParseXML : MonoBehaviour
         
     }
 
+    private String[] spawnPickups = new[] { "Earth", "Jupiter", "Mars", "Saturn"};
+
+    //Instantiate and set planet values
     private void CreatePlanet(string aName, float aDiameter, float aDistancetoSun, float aRotationPeriod, float aOrbitalVelocity, Color aCol)
     {
         var p = Instantiate(planet, transform.position, Quaternion.identity);
         _Planet = p.GetComponent<Planet>();
 
-       _Planet.CreatePlanet(aName, aDiameter, aDistancetoSun, aRotationPeriod, aOrbitalVelocity, aCol);
+        foreach (var pName in spawnPickups)
+        {
+            if (aName == pName)
+            {
+                CreateOrbit(p, aDiameter, aOrbitalVelocity);
+                break;
+            }
+        }
+
+        _Planet.CreatePlanet(aName, aDiameter, aDistancetoSun, aRotationPeriod, aOrbitalVelocity, aCol);
     }
 
-    // private void LoadData()
-    // {
-    //     name = itemDataXml.
-    // }
-    
+    private void CreateOrbit(GameObject planet, float diameter, float orbVel)
+    {
+        var o = Instantiate(orbitalPickup, transform.position, Quaternion.identity);
+        _Satellite = o.GetComponent<Satellite>();
+        _Satellite.target = planet.transform;
+        _Satellite.orbitDistance = 25f * diameter;
+        _Satellite.orbitDegreesPerSec = 180f * orbVel; 
+    }
 }
