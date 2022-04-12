@@ -30,11 +30,6 @@ public class GenerateProceduralMesh : MonoBehaviour
         UpdateMesh();
     }
 
-    private void Update()
-    {
-        
-    }
-
     void PlacePickUps(Vector3 position)
     {
         int rnd = Random.Range(0, 10000);
