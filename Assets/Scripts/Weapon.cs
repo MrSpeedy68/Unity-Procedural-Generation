@@ -42,8 +42,8 @@ public class Weapon : MonoBehaviour
             if (hit.collider.gameObject.CompareTag("AI"))
             {
                 Debug.Log("Hit AI");
-                //var AI = hit.collider.GetComponent<NPCController>();
-                //AI.TakeDamage(damage);
+                var AI = hit.collider.GetComponent<NPCController>();
+                AI.TakeDamage(damage);
             }
         }
     }
