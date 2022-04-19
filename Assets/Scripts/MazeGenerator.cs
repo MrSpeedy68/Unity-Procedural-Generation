@@ -6,6 +6,7 @@ using System;
 [Flags]
 public enum WallState
 {
+    //The wall state is stored in a nibble (4 bits) while the visited walls are stored in a byte (8 bits)
     //0000 = No Walls
     //1111 = LEFT,RIGHT,UP,DOWN
     LEFT = 1, //0001
@@ -30,9 +31,10 @@ public struct Neighbour
 
 public static class MazeGenerator
 {
+    //Returns the opposite wall
     private static WallState GetOppositeWall(WallState wall)
     {
-        switch (wall)
+        switch (wall) 
         {
             case WallState.RIGHT: return WallState.LEFT;
             case WallState.LEFT: return WallState.RIGHT;
@@ -47,15 +49,15 @@ public static class MazeGenerator
     {
         var rng = new System.Random((int)Time.time);
         var positionStack = new Stack<Position>();
-        var position = new Position { X = rng.Next(0, width), Y = rng.Next(0, height) };
+        var position = new Position { X = rng.Next(0, width), Y = rng.Next(0, height) }; //Getting a new random position with the rng
 
-        maze[position.X, position.Y] |= WallState.VISITED; // 1000 1111
+        maze[position.X, position.Y] |= WallState.VISITED; // 1000 1111 Applying Bitwise OR generating the new byte which gives a visited node 1000 with all walls present 1111
         positionStack.Push(position);
 
         while (positionStack.Count > 0)
         {
             var current = positionStack.Pop();
-            var neighbours = GetUnvisitedNeighbours(current, maze, width, height);
+            var neighbours = GetUnvisitedNeighbours(current, maze, width, height); //This will return the neighbours that are unvisited from the current position
 
             if (neighbours.Count > 0)
             {
@@ -65,10 +67,10 @@ public static class MazeGenerator
                 var randomNeighbour = neighbours[randIndex];
 
                 var nPosition = randomNeighbour.Position;
-                maze[current.X, current.Y] &= ~randomNeighbour.SharedWall;
-                maze[nPosition.X, nPosition.Y] &= ~GetOppositeWall(randomNeighbour.SharedWall);
+                maze[current.X, current.Y] &= ~randomNeighbour.SharedWall; //Removing the bits for the wall that the neighbour touches
+                maze[nPosition.X, nPosition.Y] &= ~GetOppositeWall(randomNeighbour.SharedWall); // Removing the opposite wall from the neighbour
 
-                maze[nPosition.X, nPosition.Y] |= WallState.VISITED;
+                maze[nPosition.X, nPosition.Y] |= WallState.VISITED; // Adding on the 1000 0000 state of this position being visited
                 
                 positionStack.Push(nPosition);
             }
@@ -76,13 +78,15 @@ public static class MazeGenerator
         
         return maze;
     }
+    
+    //Returns a List of Neighbours that were not yet visited e.g dont have 1000 0000
     private static List<Neighbour> GetUnvisitedNeighbours(Position p, WallState[,] maze, int width, int height)
     {
         var list = new List<Neighbour>();
 
         if (p.X > 0) //left
         {
-            if (!maze[p.X - 1, p.Y].HasFlag(WallState.VISITED))
+            if (!maze[p.X - 1, p.Y].HasFlag(WallState.VISITED)) //Check to see if the wall was not visited
             {
                 list.Add(new Neighbour
                 {
@@ -147,6 +151,7 @@ public static class MazeGenerator
         return list;
     }
     
+    //This function Generates a maze grid where all 4 walls are present in a 2D array. Then the recursive back tracker is applied to the initially generated grid.
     public static WallState[,] Generate(int width, int height)
     {
         WallState[,] maze = new WallState[width, height];

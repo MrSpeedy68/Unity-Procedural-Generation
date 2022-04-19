@@ -30,6 +30,7 @@ public class GenerateProceduralMesh : MonoBehaviour
         UpdateMesh();
     }
 
+    //Randomly spawn a pickup during the mesh generation
     void PlacePickUps(Vector3 position)
     {
         int rnd = Random.Range(0, 10000);
@@ -50,7 +51,7 @@ public class GenerateProceduralMesh : MonoBehaviour
         {
             for (int x = 0; x<=xSize; x++)
             {
-                float y = Mathf.PerlinNoise(x * perlinZoom, z * perlinZoom) * perlinHeight;
+                float y = Mathf.PerlinNoise(x * perlinZoom, z * perlinZoom) * perlinHeight; //Using Perlin noise to generate terrain height
                 vertices[i] = new Vector3(x, y, z);
                 if (spawnAmount > 0) PlacePickUps(new Vector3(x,y + 2f,z));
                 uv[i] = new Vector2(z / (float)zSize, x / (float)xSize);
@@ -82,6 +83,7 @@ public class GenerateProceduralMesh : MonoBehaviour
         }
     }
 
+    //Update Mesh is used to set the verticies and triangle and to recalculate the uv and normals so that materials dont stretch.
     void UpdateMesh()
     {
         mesh.Clear();

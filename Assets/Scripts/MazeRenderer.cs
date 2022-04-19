@@ -20,6 +20,7 @@ public class MazeRenderer : MonoBehaviour
         Draw(maze);
     }
 
+    //Function used to draw the generated maze from MazeGenerator Script
     private void Draw(WallState[,] maze)
     {
         for (int i = 0; i < width; i++)
@@ -32,15 +33,15 @@ public class MazeRenderer : MonoBehaviour
                 if (cell.HasFlag(WallState.UP))
                 {
                     var topWall = Instantiate(wallPrefab, transform) as Transform;
-                    topWall.position = position + new Vector3(0, 0, size/2);
-                    topWall.localScale = new Vector3(size, topWall.localScale.y, topWall.localScale.z);
+                    topWall.position = position + new Vector3(0, 0, size/2); //Giving the Wall the correct position
+                    topWall.localScale = new Vector3(size, topWall.localScale.y, topWall.localScale.z); // Giving the wall the correct scale
                 }
 
                 if (cell.HasFlag(WallState.LEFT))
                 {
                     var leftWall = Instantiate(wallPrefab, transform) as Transform;
                     leftWall.position = position + new Vector3(-size/2, 0, 0);
-                    leftWall.eulerAngles = new Vector3(0, 90, 0);
+                    leftWall.eulerAngles = new Vector3(0, 90, 0); // Side walls need to have a corrected rotation
                     leftWall.localScale = new Vector3(size, leftWall.localScale.y, leftWall.localScale.z);
                 }
 
@@ -68,10 +69,5 @@ public class MazeRenderer : MonoBehaviour
             }
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
