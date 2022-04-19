@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PickupManager : MonoBehaviour
 {
-    public GameObject[] pickups;
+    
     private bool startCheck = false;
     
     // Start is called before the first frame update
@@ -12,33 +13,21 @@ public class PickupManager : MonoBehaviour
     {
         StartCoroutine(FindObjects());
     }
-
-    // Update is called once per frame
-    void LateUpdate()
+    
+    void Update()
     {
         if (startCheck)
         {
-            int j = 0;
-            for(int i = 0; i < pickups.Length; i++)
+            if (GameObject.FindGameObjectsWithTag("Pickup").Length <= 0)
             {
-                if (pickups[i] == null)
-                {
-                    j++;
-                }
-
-                if (j == pickups.Length)
-                {
-                    Debug.Log("Ur Done");
-                }
-            } 
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
         }
     }
 
     IEnumerator FindObjects()
     {
-        yield return new WaitForSeconds(0.5f);
-        
-        pickups = GameObject.FindGameObjectsWithTag("Pickup");
+        yield return new WaitForSeconds(5f);
 
         startCheck = true;
         

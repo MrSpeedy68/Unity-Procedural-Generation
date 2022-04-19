@@ -15,8 +15,8 @@ public class GenerateProceduralMesh : MonoBehaviour
     public int xSize = 20;
     public int zSize = 20;
 
-    public float perlinHeight = 10f;
-    public float perlinZoom = 0.05f;
+    public float perlinHeight = 10f; // How much should the height of the terrain be multiplied by
+    public float perlinZoom = 0.05f; // Determines the smoothness of the terrain the lower the value the more smooth the terrain will become.
 
     public GameObject coin;
     public int spawnAmount;

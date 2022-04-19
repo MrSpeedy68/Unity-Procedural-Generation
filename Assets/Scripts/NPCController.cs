@@ -227,7 +227,7 @@ public class NPCController : MonoBehaviour
             Debug.DrawRay(ray.origin, ray.direction, Color.yellow);
             
             //Debug.Log(ray.origin + ray.direction * (distanceToObstacle - 1));
-            Debug.DrawLine(transform.position, ray.origin + ray.direction * (distanceToObstacle - 5f), Color.blue,5f);
+            //Debug.DrawLine(transform.position, ray.origin + ray.direction * (distanceToObstacle - 5f), Color.blue,5f);
             return ray.origin + ray.direction * (distanceToObstacle - 5f);
             
         } while (distanceToObstacle < 1.0f);
