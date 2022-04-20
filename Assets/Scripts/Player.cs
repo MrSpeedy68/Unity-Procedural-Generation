@@ -11,13 +11,26 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        GetDBScore();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    private void GetDBScore()
+    {
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex == 4)
+        {
+            if (DBManager.isNewGame)
+            {
+                score = 0;
+            }
+            else score = DBManager.currentScore;
+        }
+        else score = DBManager.currentScore;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -32,5 +45,6 @@ public class Player : MonoBehaviour
     private void AddScore(int amount)
     {
         score += amount;
+        DBManager.currentScore = score;
     }
 }

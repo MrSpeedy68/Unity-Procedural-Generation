@@ -25,7 +25,7 @@ public class Planet : MonoBehaviour
         diameter = newDiameter * 25;
         distanceToSun = newDistanceToSun * 150;
         rotationPeriod = newRotationPeriod;
-        orbitalVelocity = newOrbitalVelocity * 0.1f;
+        orbitalVelocity = newOrbitalVelocity * 50f;
         color = newColor;
     }  
 
