@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
@@ -54,9 +55,19 @@ public class UIManager : MonoBehaviour
 
         if (scoreUI.activeSelf)
         {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             Time.timeScale = 1f;
         }
-        else Time.timeScale = 0;
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            Time.timeScale = 0;
+            
+        }
+
+        
     }
 
     public void ContinueGame()
@@ -66,7 +77,21 @@ public class UIManager : MonoBehaviour
 
     public void SaveScore() //Exiting UI Should save the score in PlayerPrefs.
     {
-        DBManager.SaveScore();
+        //DBManager.SaveScore();
+        PlayerPrefs.SetInt(DBManager.username, DBManager.currentScore);
+        PlayerPrefs.SetInt(DBManager.username + "scene", SceneManager.GetActiveScene().buildIndex);
+        
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Time.timeScale = 1f;
+        
         SceneManager.LoadScene(0);
+        
+        
+    }
+
+    public void SaveScoreDB()
+    {
+        DBManager.SaveScore();
     }
 }

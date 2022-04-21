@@ -489,6 +489,8 @@ MonoBehaviour:
   scoreText: {fileID: 432062187}
   usernameText: {fileID: 1499690108}
   previousHighScoreText: {fileID: 999329467}
+  scoreUI: {fileID: 0}
+  pauseUI: {fileID: 0}
 --- !u!1 &763833544
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,7 +803,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 705287670}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: SaveScore
+        m_MethodName: SaveScoreDB
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

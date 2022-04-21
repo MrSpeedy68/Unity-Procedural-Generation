@@ -21,6 +21,11 @@ public static class DBManager
         username = null;
     }
 
+    public static void ContinueGame()
+    {
+        currentScore = PlayerPrefs.GetInt(username);
+    }
+
     public static void SaveScore()
     {
         if (currentScore > score)

@@ -10,8 +10,13 @@ public class NewGameUI : MonoBehaviour
 {
     public void Continue()
     {
-        DBManager.isNewGame = false;
-        //SceneManager.LoadScene(_sceneNumber Where Ended);
+        if (PlayerPrefs.GetInt(DBManager.username + "scene") >= 4)
+        {
+            DBManager.isNewGame = false;
+            DBManager.ContinueGame();
+            SceneManager.LoadScene(PlayerPrefs.GetInt(DBManager.username+"scene"));
+        }
+
     }
 
     public void NewGame()
