@@ -22,6 +22,7 @@ public class NewGameUI : MonoBehaviour
     public void NewGame()
     {
         DBManager.isNewGame = true;
+        DBManager.currentScore = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

@@ -24,6 +24,8 @@ public class LogIn : MonoBehaviour
         form.AddField("password", passwordField.text);
         WWW www = new WWW(url, form);
         yield return www;
+        
+        Debug.Log(www.text);
 
         if (www.text[0] == '0')
         {

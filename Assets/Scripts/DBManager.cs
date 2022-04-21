@@ -25,29 +25,4 @@ public static class DBManager
     {
         currentScore = PlayerPrefs.GetInt(username);
     }
-
-    public static void SaveScore()
-    {
-        if (currentScore > score)
-        {
-            WWWForm form = new WWWForm();
-            form.AddField("name", DBManager.username);
-            form.AddField("score", DBManager.score);
-
-            WWW www = new WWW(url, form);
-            if (www.text == "0")
-            {
-                Debug.Log("Game Saved");
-            }
-            else
-            {
-                Debug.Log("Save Failed. Error #" + www.text);
-            }
-        }
-        
-        LogOut();
-    }
-    
-    
-    
 }

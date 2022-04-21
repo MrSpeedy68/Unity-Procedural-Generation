@@ -20,6 +20,9 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         pauseUI.SetActive(false);
+        
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
 
@@ -43,7 +46,7 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            ChangeUI();
+            if (pauseUI && scoreUI) ChangeUI();
         }
 
     }
@@ -86,12 +89,37 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 1f;
         
         SceneManager.LoadScene(0);
-        
-        
     }
 
     public void SaveScoreDB()
     {
-        DBManager.SaveScore();
+        StartCoroutine(SavePlayerData());
+    }
+    
+    private string url = "https://elviveamten.000webhostapp.com/Savedata.php";
+
+    IEnumerator SavePlayerData()
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("name", DBManager.username);
+        form.AddField("score", DBManager.currentScore);
+        
+        Debug.Log("Save Data " + DBManager.username +"   " + DBManager.currentScore);
+
+        WWW www = new WWW(url, form);
+        yield return www;
+        
+        Debug.Log(www.text);
+        if (www.text == "0")
+        {
+            Debug.Log("Game Saved");
+        }
+        else
+        {
+            Debug.Log("Save Failed. Error #" + www.text.ToString());
+        }
+        
+        DBManager.LogOut();
+        SceneManager.LoadScene(0);
     }
 }

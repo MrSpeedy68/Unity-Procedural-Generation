@@ -87,6 +87,6 @@ public class ParseXML : MonoBehaviour
         _Satellite = o.GetComponent<Satellite>();
         _Satellite.target = planet.transform;
         _Satellite.orbitDistance = 25f * diameter;
-        _Satellite.orbitDegreesPerSec = 180f * orbVel; 
+        _Satellite.orbitDegreesPerSec = 360f * orbVel; 
     }
 }
