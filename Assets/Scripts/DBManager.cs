@@ -23,18 +23,21 @@ public static class DBManager
 
     public static void SaveScore()
     {
-        WWWForm form = new WWWForm();
-        form.AddField("name", DBManager.username);
-        form.AddField("score", DBManager.score);
+        if (currentScore > score)
+        {
+            WWWForm form = new WWWForm();
+            form.AddField("name", DBManager.username);
+            form.AddField("score", DBManager.score);
 
-        WWW www = new WWW(url, form);
-        if (www.text == "0")
-        {
-            Debug.Log("Game Saved");
-        }
-        else
-        {
-            Debug.Log("Save Failed. Error #" + www.text);
+            WWW www = new WWW(url, form);
+            if (www.text == "0")
+            {
+                Debug.Log("Game Saved");
+            }
+            else
+            {
+                Debug.Log("Save Failed. Error #" + www.text);
+            }
         }
         
         LogOut();

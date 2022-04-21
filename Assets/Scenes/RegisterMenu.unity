@@ -763,7 +763,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameField: {fileID: 1067572429}
   passwordField: {fileID: 70568196}
-  submitButton: {fileID: 1554671040}
+  registerButton: {fileID: 1554671040}
 --- !u!1 &763833544
 GameObject:
   m_ObjectHideFlags: 0

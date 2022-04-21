@@ -12,7 +12,7 @@ public class Registration : MonoBehaviour
     
     public TMP_InputField nameField;
     public TMP_InputField passwordField;
-    public Button submitButton;
+    public Button registerButton;
 
     public void CallRegister()
     {
@@ -39,6 +39,6 @@ public class Registration : MonoBehaviour
 
     public void VerifyInputs()
     {
-        submitButton.interactable = (nameField.text.Length >= 8 && passwordField.text.Length >= 8);
+        registerButton.interactable = (nameField.text.Length >= 8 && passwordField.text.Length >= 8);
     }
 }

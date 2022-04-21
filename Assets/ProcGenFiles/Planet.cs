@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Planet : MonoBehaviour
@@ -16,6 +17,7 @@ public class Planet : MonoBehaviour
     int lengthOfLineRenderer = 100;
 
     GameObject sun;
+    public TMP_Text nameText;
 
 
 
@@ -25,8 +27,10 @@ public class Planet : MonoBehaviour
         diameter = newDiameter * 25;
         distanceToSun = newDistanceToSun * 150;
         rotationPeriod = newRotationPeriod;
-        orbitalVelocity = newOrbitalVelocity * 50f;
+        orbitalVelocity = newOrbitalVelocity;
         color = newColor;
+
+        ChangeName(name);
     }  
 
     void DrawOrbit()
@@ -50,10 +54,16 @@ public class Planet : MonoBehaviour
         }
     }
 
+    private void ChangeName(string newName)
+    {
+        nameText.text = newName;
+    }
+
 
     void Start()
     {
         sun = GameObject.Find("sun");
+        //nameText = GetComponent<TMP_Text>();
         transform.position = new Vector3(distanceToSun, 0, distanceToSun);
         transform.localScale = new Vector3(diameter, diameter, diameter);
         transform.name = name;
